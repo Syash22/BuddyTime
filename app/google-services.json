@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "969385429080",
+    "project_id": "buddytime-kkk",
+    "storage_bucket": "buddytime-kkk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969385429080:android:d0cc11c3575df1c30ee22d",
+        "android_client_info": {
+          "package_name": "com.company.buddytime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoJuYWh98ATLxnHJ2AlBgXt9Ky69OUtbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
