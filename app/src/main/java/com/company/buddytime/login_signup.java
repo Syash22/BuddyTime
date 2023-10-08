@@ -33,7 +33,7 @@ public class login_signup extends AppCompatActivity {
             public void onClick(View v){
                 String email = inEmail.getText().toString();
                 String passwd = inPasswd.getText().toString();
-                auth.createAccount(email, passwd, new LoginActivity.CreateAccountCallback() {
+                auth.createAccount(email, passwd, new LoginActivity.AccountCallback() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(

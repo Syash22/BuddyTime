@@ -26,6 +26,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".login_signup"></activity>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
