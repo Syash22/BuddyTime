@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         Button logoutButton = findViewById(R.id.logoutbtn);
-
+        Button addschebtn = findViewById(R.id.addSchedule);
         // 로그아웃
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 auth.signOut();
+            }
+        });
+        addschebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 일정 추가 화면으로 이동
+                Intent intent = new Intent(getApplicationContext(), add_schedule.class);
+                startActivity(intent);
             }
         });
     }

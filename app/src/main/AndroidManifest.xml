@@ -13,7 +13,7 @@
         android:theme="@style/Theme.BuddyTIme"
         tools:targetApi="31">
         <activity
-            android:name=".login_signin"
+            android:name=".add_schedule"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".login_signup"></activity>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".login_signin"/>
     </application>
 
 </manifest>
