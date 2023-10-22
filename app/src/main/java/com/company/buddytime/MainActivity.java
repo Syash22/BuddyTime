@@ -9,8 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.ktx.*;
-import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -20,10 +18,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         auth = FirebaseAuth.getInstance();
 
+        Button sumbtn = findViewById(R.id.summarybtn);
         Button logoutButton = findViewById(R.id.logoutbtn);
         Button addschebtn = findViewById(R.id.addSchedule);
         Button detail = findViewById(R.id.detailbtn);
         // 로그아웃
+        sumbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, summary_schedule.class);
+                startActivity(intent);
+            }
+        });
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
+
+
 
 }

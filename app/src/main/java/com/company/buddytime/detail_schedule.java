@@ -37,6 +37,7 @@ public class detail_schedule extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Date = findViewById(R.id.todayDate);
         Time = findViewById(R.id.targetTime);
         Title = findViewById(R.id.schTitle);
@@ -45,14 +46,19 @@ public class detail_schedule extends AppCompatActivity {
         deleteBtn = findViewById(R.id.deleteButton);
         sharedSw = findViewById(R.id.sharedSwitch);
 
-        DocumentReference docRef = db.collection("schedule").document("An2VtmPdYlDXyBj9TklX");
+        DocumentReference docRef = db.collection("schedule").document("u80T67iBR4b2xIqDd5aq");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Title.setText(document.getString("category"));
+                        Title.setText(document.getString("title"));
+                        Contents.setText(document.getString("contents"));
+                        String time1 = timeFormat.format(document.getTimestamp("time1").toDate());
+                        String time2 = timeFormat.format(document.getTimestamp("time2").toDate());
+                        String time3 = time1 + " ~ " + time2;
+                        Time.setText(time3);
                         Date.setText(dateFormat.format(document.getTimestamp("time1").toDate()));
 
                         Log.d(TAG, "DocumentSnapshot data: " + dateFormat.format(document.getTimestamp("time1").toDate()));

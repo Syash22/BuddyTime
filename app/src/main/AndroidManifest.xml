@@ -29,6 +29,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".login_signup"/>
         <activity android:name=".detail_schedule"/>
+        <activity android:name=".summary_schedule" android:theme="@android:style/Theme.Holo.Dialog"></activity>
     </application>
 
 </manifest>
