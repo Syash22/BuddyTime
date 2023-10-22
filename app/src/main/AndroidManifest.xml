@@ -28,6 +28,7 @@
         <activity android:name=".add_schedule"></activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".login_signup"/>
+        <activity android:name=".detail_schedule"/>
     </application>
 
 </manifest>
