@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="1080dp"
+    android:layout_height="2160dp"
     tools:layout_editor_absoluteX="-71dp"
     tools:layout_editor_absoluteY="-1dp">
 
@@ -26,7 +26,7 @@
         android:id="@+id/addbtn"
         android:layout_width="73dp"
         android:layout_height="48dp"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:text="확인"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="일정명"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="시간"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="분류"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="내용"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -151,7 +151,7 @@
         android:layout_width="333dp"
         android:layout_height="163dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/memo_border"
         android:ems="10"
         android:hint="내용을 입력하세요."
@@ -173,5 +173,15 @@
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toEndOf="@+id/input_time"
         app:layout_constraintTop_toBottomOf="@+id/input_title" />
+
+    <Switch
+        android:id="@+id/sharedSw"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:text="친구에게 공유"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_contents" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

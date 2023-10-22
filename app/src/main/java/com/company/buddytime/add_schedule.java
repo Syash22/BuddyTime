@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -20,7 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.errorprone.annotations.ForOverride;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -38,10 +42,11 @@ public class add_schedule extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener callbackDate;
     private int selectedHour;
     private int selectedMinute;
-
+    Switch sharedSwitch;
     TextView title, category, contents;
     String startTime, endTime;
-
+    Boolean shared = false;
+    FirebaseUser user;
     String userEnterDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +54,21 @@ public class add_schedule extends AppCompatActivity {
         setContentView(R.layout.add_schedule);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Button addBtn = (Button) findViewById(R.id.addbtn);
+        sharedSwitch = findViewById(R.id.sharedSw);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         this.InitializeView();
         this.InitializeListener();
+
+        sharedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonview, boolean ischecked) {
+                if(ischecked)
+                    shared = true;
+                else
+                    shared = false;
+            }
+        });
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +90,9 @@ public class add_schedule extends AppCompatActivity {
                     schedule.put("time2", userDateTime2);
                     schedule.put("category", category.getText().toString());
                     schedule.put("contents", contents.getText().toString());
+                    schedule.put("shared", shared);
+                    schedule.put("ownerid", user.getEmail());
+
 
                     db.collection("schedule")
                             .add(schedule)
@@ -118,7 +138,6 @@ public class add_schedule extends AppCompatActivity {
             }
         };
     }
-
 
     public void OnClickHandler(View view)
     {
