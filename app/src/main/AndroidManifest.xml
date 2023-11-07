@@ -13,7 +13,7 @@
         android:theme="@style/Theme.BuddyTIme"
         tools:targetApi="31">
         <activity
-            android:name=".login_signin"
+            android:name=".AcceptFriend"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,7 @@
         <activity android:name=".login_signup"/>
         <activity android:name=".detail_schedule"/>
         <activity android:name=".summary_schedule" android:theme="@android:style/Theme.Holo.Dialog"></activity>
+        <activity android:name=".login_signin"/>
     </application>
 
 </manifest>
