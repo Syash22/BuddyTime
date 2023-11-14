@@ -36,6 +36,7 @@ public class login_signup extends AppCompatActivity {
                 auth.createAccount(email, passwd, new LoginActivity.AccountCallback() {
                     @Override
                     public void onSuccess() {
+
                         Toast.makeText(
                                 login_signup.this, "계정 생성 완료.",
                                 Toast.LENGTH_SHORT

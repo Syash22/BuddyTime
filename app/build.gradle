@@ -37,9 +37,16 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    // Firebase BOM을 사용하여 Firebase 모듈들의 버전을 통일
     implementation platform('com.google.firebase:firebase-bom:32.3.1')
-    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Firebase 모듈들을 명시적으로 지정
     implementation 'com.google.firebase:firebase-analytics'
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-firestore")
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // Firebase Admin SDK는 서버 측에서 사용, Android 앱에서는 사용하지 않음
+    // (필요 시 Android 앱에서 사용 중인 다른 Firebase 모듈들의 버전을 확인하여 충돌 해결)
+    // implementation 'com.google.firebase:firebase-admin:9.2.0'
 }
