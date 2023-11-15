@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/acpt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -21,12 +21,11 @@
 
 
     <ListView
-        android:id="@+id/acceptList"
+        android:id="@+id/acpt_listview"
         android:layout_width="392dp"
         android:layout_height="647dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </LinearLayout>

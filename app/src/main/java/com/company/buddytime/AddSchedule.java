@@ -4,8 +4,6 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.errorprone.annotations.ForOverride;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -36,7 +33,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class add_schedule extends AppCompatActivity {
+public class AddSchedule extends AppCompatActivity {
     private TextView textView_Date;
     private TextView textView_Time1, textView_Time2;
     private DatePickerDialog.OnDateSetListener callbackDate;
@@ -101,7 +98,7 @@ public class add_schedule extends AppCompatActivity {
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                                     Toast.makeText(
-                                            add_schedule.this, "일정이 생성 되었습니다.",
+                                            AddSchedule.this, "일정이 생성 되었습니다.",
                                             Toast.LENGTH_SHORT
                                     ).show();
                                     finish();
@@ -112,7 +109,7 @@ public class add_schedule extends AppCompatActivity {
                                 public void onFailure(@NonNull Exception e) {
                                     Log.w(TAG, "Error adding document", e);
                                     Toast.makeText(
-                                            add_schedule.this, "일정 생성 실패.",
+                                            AddSchedule.this, "일정 생성 실패.",
                                             Toast.LENGTH_SHORT
                                     ).show();
                                 }

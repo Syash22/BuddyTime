@@ -9,13 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-
-public class login_signup extends AppCompatActivity {
+public class LoginSignUp extends AppCompatActivity {
     Button signupbtn;
     private LoginActivity auth;
     EditText inEmail, inPasswd;
@@ -38,7 +33,7 @@ public class login_signup extends AppCompatActivity {
                     public void onSuccess() {
 
                         Toast.makeText(
-                                login_signup.this, "계정 생성 완료.",
+                                LoginSignUp.this, "계정 생성 완료.",
                                 Toast.LENGTH_SHORT
                         ).show();
                         finish();
@@ -47,7 +42,7 @@ public class login_signup extends AppCompatActivity {
                     @Override
                     public void onFailure() {
                         Toast.makeText(
-                                login_signup.this, "계정 생성 실패",
+                                LoginSignUp.this, "계정 생성 실패",
                                 Toast.LENGTH_SHORT
                         ).show();
                     }

@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class detail_schedule extends AppCompatActivity {
+public class DetailSchedule extends AppCompatActivity {
     TextView Date, Time, Title, Contents;
     Button editBtn, deleteBtn;
     Switch sharedSw;

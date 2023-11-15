@@ -13,7 +13,7 @@
         android:theme="@style/Theme.BuddyTIme"
         tools:targetApi="31">
         <activity
-            android:name=".AcceptFriend"
+            android:name=".LoginSignIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,12 +25,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".add_schedule"></activity>
+        <activity android:name=".AddSchedule"></activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".login_signup"/>
-        <activity android:name=".detail_schedule"/>
-        <activity android:name=".summary_schedule" android:theme="@android:style/Theme.Holo.Dialog"></activity>
-        <activity android:name=".login_signin"/>
+        <activity android:name=".LoginSignUp"/>
+        <activity android:name=".DetailSchedule"/>
+        <activity android:name=".SummarySchedule" android:theme="@android:style/Theme.Holo.Dialog"></activity>
+        <activity android:name=".AcceptFriend"/>
     </application>
 
 </manifest>

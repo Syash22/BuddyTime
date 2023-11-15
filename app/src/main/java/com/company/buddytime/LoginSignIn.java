@@ -9,11 +9,10 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class login_signin extends AppCompatActivity {
+public class LoginSignIn extends AppCompatActivity {
     TextView text;
     EditText inEmail, inPasswd;
     private LoginActivity auth;
@@ -33,7 +32,7 @@ public class login_signin extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), login_signup.class);
+                Intent intent = new Intent(getApplicationContext(), LoginSignUp.class);
                 startActivity(intent);
 
             }

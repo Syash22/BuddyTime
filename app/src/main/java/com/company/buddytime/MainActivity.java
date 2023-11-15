@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         sumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, summary_schedule.class);
+                Intent intent = new Intent(MainActivity.this, SummarySchedule.class);
                 startActivity(intent);
             }
         });
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 로그인 화면으로 이동
-                Intent intent = new Intent(MainActivity.this, login_signin.class);
+                Intent intent = new Intent(MainActivity.this, LoginSignIn.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 auth.signOut();
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 일정 추가 화면으로 이동
-                Intent intent = new Intent(getApplicationContext(), add_schedule.class);
+                Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
                 startActivity(intent);
             }
         });
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 일정 추가 화면으로 이동
-                Intent intent = new Intent(getApplicationContext(), detail_schedule.class);
+                Intent intent = new Intent(getApplicationContext(), DetailSchedule.class);
                 startActivity(intent);
             }
         });

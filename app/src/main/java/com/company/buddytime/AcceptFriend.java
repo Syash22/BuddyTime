@@ -22,7 +22,7 @@ public class AcceptFriend extends AppCompatActivity {
         dataSample.add("Test2");
         dataSample.add("Test3");
 
-        exampleList = findViewById(R.id.acceptList);
+        exampleList = findViewById(R.id.acpt_listview);
         ButtonListAdapter buttonListAdapter = new ButtonListAdapter(this, dataSample);
 
         exampleList.setAdapter(buttonListAdapter);
