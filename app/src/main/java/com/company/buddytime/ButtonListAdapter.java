@@ -10,13 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ButtonListAdapter extends BaseAdapter {
-    Context context;
-    LayoutInflater layoutInflater;
-    ArrayList<String> data;
-    public ButtonListAdapter(Context context, ArrayList<String> data){
+    private Context context;
+    private LayoutInflater layoutInflater;
+    private ArrayList<String> data;
+    private AcceptFriend activity; // AcceptFriend 액티비티 참조 추가
+    public ButtonListAdapter(Context context, ArrayList<String> data, AcceptFriend activity) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
+        this.activity = activity; // 액티비티 참조 초기화
     }
     @Override
     public int getCount() {
@@ -42,17 +44,20 @@ public class ButtonListAdapter extends BaseAdapter {
 
         Button accBtn = view.findViewById(R.id.acceptBtn);
         Button dclBtn = view.findViewById(R.id.declineBtn);
-        accBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
 
+        accBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 액티비티의 메서드 호출 대신, 어댑터의 메서드 호출
+                activity.onAcceptButtonClick(data.get(position));
             }
         });
 
-        dclBtn.setOnClickListener(new View.OnClickListener(){
+        dclBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
+                // 액티비티의 메서드 호출 대신, 어댑터의 메서드 호출
+                activity.onDeclineButtonClick(data.get(position));
             }
         });
 

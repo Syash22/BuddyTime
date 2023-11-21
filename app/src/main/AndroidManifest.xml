@@ -31,6 +31,7 @@
         <activity android:name=".DetailSchedule"/>
         <activity android:name=".SummarySchedule" android:theme="@android:style/Theme.Holo.Dialog"></activity>
         <activity android:name=".AcceptFriend"/>
+        <activity android:name=".RequestFriend"/>
     </application>
 
 </manifest>
