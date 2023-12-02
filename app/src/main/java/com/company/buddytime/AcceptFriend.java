@@ -1,6 +1,7 @@
 package com.company.buddytime;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -45,19 +46,29 @@ public class AcceptFriend extends AppCompatActivity {
 
         // friends 컬렉션에서 조건에 맞는 문서 가져오기
         friendsCollection.whereEqualTo("searchEmail", currentUserEmail)
-                .whereEqualTo("friend", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             // friends 컬렉션에서 가져온 문서의 currentUserEmail 값을 ArrayList에 추가
                             String friendEmail = document.getString("currentUserEmail");
-                            dataSample.add(friendEmail);
+                            // 추가하기 전에 이미 친구 관계가 형성되었는지 확인
+                            isFriendRelationship(currentUserEmail, friendEmail, new FriendCheckCallback() {
+                                @Override
+                                public void onResult(boolean isFriend) {
+                                    if (!isFriend) {
+                                        // 친구 요청이 왔다고 판단하고 리스트뷰에 추가
+                                        dataSample.add(friendEmail);
+                                        Log.d("FriendRelationship", "투르투르");
 
+                                        // 리스트뷰 갱신
+                                        runOnUiThread(() -> buttonListAdapter.notifyDataSetChanged());
+                                    } else {
+                                        Log.d("FriendRelationship", "일로가");
+                                    }
+                                }
+                            });
                         }
-
-                        // 어댑터 갱신
-                        buttonListAdapter.notifyDataSetChanged();
                     } else {
                         // 가져오기 실패
                         // 실패에 대한 처리를 여기에 추가
@@ -66,6 +77,35 @@ public class AcceptFriend extends AppCompatActivity {
 
         exampleList.setAdapter(buttonListAdapter);
     }
+    private void isFriendRelationship(String currentUserEmail, String friendEmail, FriendCheckCallback callback) {
+        friendsCollection.whereEqualTo("currentUserEmail", currentUserEmail)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // friends 컬렉션에서 가져온 문서의 currentUserEmail 값을 비교
+                            String fe = document.getString("searchEmail");
+                            if (fe.equals(friendEmail)) {
+                                // 친구 관계가 존재하는 경우
+                                callback.onResult(true);
+                                return;
+                            }
+                        }
+                        // 모든 문서를 확인했지만 친구 관계를 찾지 못한 경우
+                        callback.onResult(false);
+                    } else {
+                        // 쿼리 실행 중 에러가 발생한 경우
+                        callback.onResult(false);
+                    }
+                });
+    }
+    public interface FriendCheckCallback {
+        void onResult(boolean isFriend);
+    }
+
+
+
+
 
     // accBtn 클릭 시 호출되는 메서드
     public void onAcceptButtonClick(String friendEmail) {
