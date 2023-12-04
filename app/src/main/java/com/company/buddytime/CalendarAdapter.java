@@ -1,6 +1,7 @@
 package com.company.buddytime;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +11,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>{
 
     ArrayList<LocalDate> dayList;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String currentUserEmail;
     int selectedPosition = RecyclerView.NO_POSITION; //클릭한 아이템의 위치를 저장
+
 
     public CalendarAdapter(ArrayList<LocalDate> dayList) {
 
@@ -71,6 +89,45 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
                 notifyDataSetChanged();
                 // 클릭된 날짜의 뷰를 강조
                 view.setBackgroundResource(R.drawable.calendar_square);
+                LocalDate selectedDate = dayList.get(selectedPosition);
+                Toast.makeText(view.getContext(), "Selected date: " + selectedDate, Toast.LENGTH_SHORT).show();
+
+                currentUserEmail = user.getEmail();
+                Date startDate = Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Date endDate = Date.from(selectedDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+                Timestamp startTimestamp = new Timestamp(startDate);
+                Timestamp endTimestamp = new Timestamp(endDate);
+
+                // Firestore 쿼리 작성
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                CollectionReference scheduleCollection = db.collection("schedule");
+                Query query = scheduleCollection
+                        .whereEqualTo("ownerid", currentUserEmail)
+                        .whereGreaterThanOrEqualTo("time1", startTimestamp)
+                        .whereLessThan("time1", endTimestamp);
+
+                // 쿼리 실행
+                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> documentData = document.getData();
+
+                                // 가져온 문서의 모든 필드 정보를 로그에 출력
+                                for (Map.Entry<String, Object> entry : documentData.entrySet()) {
+                                    String fieldName = entry.getKey();
+                                    Object value = entry.getValue();
+                                    Log.d("Firestore", "Field: " + fieldName + ", Value: " + value);
+                                }
+                            }
+                        } else {
+                            // 오류 처리
+                            Log.e("Firestore", "문서 가져오기 오류: ", task.getException());
+                        }
+                    }
+                });
             }
         });
     }
