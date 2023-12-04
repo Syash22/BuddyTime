@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +43,7 @@ public class CalendarMain extends AppCompatActivity implements CalendarAdapter.O
     private LocalDate selectedDate;
     private RecyclerView recyclerView;
     private ListView listView;
+    FloatingActionButton add, fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +56,26 @@ public class CalendarMain extends AppCompatActivity implements CalendarAdapter.O
         ImageButton nextBtn = findViewById(R.id.next_btn);
         recyclerView = findViewById(R.id.recyclerView);
         listView = findViewById(R.id.summary_list);
+        add = findViewById(R.id.fab_add);
+        fd = findViewById(R.id.fab_fd);
 
         selectedDate = LocalDate.now();
         setMonthView();
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
+                startActivity(intent);
+            }
+        });
+        fd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FriendMain.class);
+                startActivity(intent);
+            }
+        });
 
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override

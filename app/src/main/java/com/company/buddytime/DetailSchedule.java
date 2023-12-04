@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailSchedule extends AppCompatActivity {
     TextView Date, Time, Title, Contents;
@@ -33,7 +38,7 @@ public class DetailSchedule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_schedule);
+        setContentView(R.layout.detail_schedule_new);
 
         db = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
@@ -64,6 +69,9 @@ public class DetailSchedule extends AppCompatActivity {
                         Time.setText(time3);
                         Date.setText(dateFormat.format(document.getTimestamp("time1").toDate()));
 
+                        boolean isShared = document.getBoolean("shared");
+                        sharedSw.setChecked(isShared);
+
                         Log.d(TAG, "DocumentSnapshot data: " + dateFormat.format(document.getTimestamp("time1").toDate()));
 
                     } else {
@@ -74,5 +82,32 @@ public class DetailSchedule extends AppCompatActivity {
                 }
             }
         });
+        sharedSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // 스위치 상태 변경에 따라 Firestore 문서 업데이트
+                updateSharedField(documentId, isChecked);
+            }
+        });
+    }
+    private void updateSharedField(String documentId, boolean isChecked) {
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("shared", isChecked);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("schedule").document(documentId);
+        docRef.update(updates)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
     }
 }

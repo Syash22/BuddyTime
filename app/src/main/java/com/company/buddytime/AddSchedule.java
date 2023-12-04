@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class AddSchedule extends AppCompatActivity {
@@ -45,6 +46,8 @@ public class AddSchedule extends AppCompatActivity {
     Boolean shared = false;
     FirebaseUser user;
     String userEnterDate;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    String currentDate = sdf.format(new Date());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class AddSchedule extends AppCompatActivity {
         Button addBtn = (Button) findViewById(R.id.addbtn);
         sharedSwitch = findViewById(R.id.sharedSw);
         user = FirebaseAuth.getInstance().getCurrentUser();
+        textView_Date = findViewById(R.id.setDate);
+        textView_Date.setText(currentDate);
 
         this.InitializeView();
         this.InitializeListener();
@@ -131,7 +136,7 @@ public class AddSchedule extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
             {
-                textView_Date.setText(String.format("%04d-%02d-%02d", year, monthOfYear, dayOfMonth));
+                textView_Date.setText(String.format("%04d-%02d-%02d", year, monthOfYear+1, dayOfMonth));
             }
         };
     }

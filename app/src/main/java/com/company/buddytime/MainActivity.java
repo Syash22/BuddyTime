@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button req = findViewById(R.id.reqBtn);
         Button act = findViewById(R.id.actBtn);
         Button calman = findViewById(R.id.maincalBtn);
+        Button fdBtn = findViewById(R.id.fdBtn);
         // 로그아웃
         sumbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 일정 추가 화면으로 이동
                 Intent intent = new Intent(getApplicationContext(), AcceptFriend.class);
+                startActivity(intent);
+            }
+        });
+        fdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 일정 추가 화면으로 이동
+                Intent intent = new Intent(getApplicationContext(), FriendMain.class);
                 startActivity(intent);
             }
         });

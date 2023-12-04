@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuddyTIme"
         tools:targetApi="31">
+
         <activity
             android:name=".LoginSignIn"
             android:exported="true">
@@ -33,6 +34,8 @@
         <activity android:name=".AcceptFriend"/>
         <activity android:name=".RequestFriend"/>
         <activity android:name=".CalendarMain"/>
+        <activity android:name=".FriendMain"/>
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
     </application>
 
 </manifest>

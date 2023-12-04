@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.company.buddytime'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.company.buddytime"
@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.android.material:material:1.12.0-alpha01'
 
     // Firebase Admin SDK는 서버 측에서 사용, Android 앱에서는 사용하지 않음
     // (필요 시 Android 앱에서 사용 중인 다른 Firebase 모듈들의 버전을 확인하여 충돌 해결)

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_custom_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".CalendarMain"
+    >
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,10 +125,34 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="360dp" />
-
-    <ListView
-        android:id="@+id/summary_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/summary_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_fd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/icon_friend"
+            android:contentDescription="@string/app_name" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="90dp"
+            android:layout_marginRight="24dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/icon_calendar"
+            android:contentDescription="@string/app_name" />
+    </FrameLayout>
+
 
 </LinearLayout>
