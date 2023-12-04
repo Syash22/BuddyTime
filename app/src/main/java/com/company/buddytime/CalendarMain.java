@@ -1,10 +1,12 @@
 package com.company.buddytime;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -141,7 +143,8 @@ public class CalendarMain extends AppCompatActivity implements CalendarAdapter.O
                         Timestamp time1Timestamp = (Timestamp) documentData.get("time1");
                         Date time1Date = time1Timestamp.toDate();
 
-                        ScheduleItem scheduleItem = new ScheduleItem(title, time1Date);
+                        ScheduleItem scheduleItem = new ScheduleItem(title, time1Date, document.getId());
+                        // 여기에서 document.getId()를 ScheduleItem에 저장합니다.
                         scheduleItems.add(scheduleItem);
                     }
 
@@ -156,5 +159,22 @@ public class CalendarMain extends AppCompatActivity implements CalendarAdapter.O
     private void updateListView(ArrayList<ScheduleItem> scheduleItems) {
         ScheduleListAdapter adapter = new ScheduleListAdapter(this, scheduleItems);
         listView.setAdapter(adapter);
+
+        // 리스트뷰 아이템 클릭 이벤트 처리
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 클릭된 아이템의 문서 ID를 가져옴
+                String documentId = scheduleItems.get(position).getDocumentId();
+
+                // DetailSchedule 액티비티 실행
+                startDetailScheduleActivity(documentId);
+            }
+        });
+    }
+    private void startDetailScheduleActivity(String documentId) {
+        Intent intent = new Intent(this, DetailSchedule.class);
+        intent.putExtra("documentId", documentId);
+        startActivity(intent);
     }
 }

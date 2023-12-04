@@ -2,6 +2,7 @@ package com.company.buddytime;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class DetailSchedule extends AppCompatActivity {
         setContentView(R.layout.detail_schedule);
 
         db = FirebaseFirestore.getInstance();
+        Intent intent = getIntent();
+        String documentId = intent.getStringExtra("documentId");
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -46,7 +49,7 @@ public class DetailSchedule extends AppCompatActivity {
         deleteBtn = findViewById(R.id.deleteButton);
         sharedSw = findViewById(R.id.sharedSwitch);
 
-        DocumentReference docRef = db.collection("schedule").document("u80T67iBR4b2xIqDd5aq");
+        DocumentReference docRef = db.collection("schedule").document(documentId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
