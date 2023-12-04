@@ -34,6 +34,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String currentUserEmail;
     int selectedPosition = RecyclerView.NO_POSITION; //클릭한 아이템의 위치를 저장
+    private OnDateClickListener onDateClickListener;
+    public void setOnDateClickListener(OnDateClickListener listener) {
+        this.onDateClickListener = listener;
+    }
 
 
     public CalendarAdapter(ArrayList<LocalDate> dayList) {
@@ -91,7 +95,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
                 view.setBackgroundResource(R.drawable.calendar_square);
                 LocalDate selectedDate = dayList.get(selectedPosition);
                 Toast.makeText(view.getContext(), "Selected date: " + selectedDate, Toast.LENGTH_SHORT).show();
-
+                if (onDateClickListener != null) {
+                    onDateClickListener.onDateClick(selectedDate);
+                }
                 currentUserEmail = user.getEmail();
                 Date startDate = Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 Date endDate = Date.from(selectedDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -150,5 +156,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
             dayText = itemView.findViewById(R.id.dayText);
         }
+    }
+    public interface OnDateClickListener {
+        void onDateClick(LocalDate selectedDate);
     }
 }
