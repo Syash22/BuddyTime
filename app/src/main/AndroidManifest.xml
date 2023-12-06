@@ -35,6 +35,7 @@
         <activity android:name=".RequestFriend"/>
         <activity android:name=".CalendarMain"/>
         <activity android:name=".FriendMain"/>
+        <activity android:name=".editSchedule"/>
         <meta-data android:name="android.max_aspect" android:value="2.1" />
     </application>
 

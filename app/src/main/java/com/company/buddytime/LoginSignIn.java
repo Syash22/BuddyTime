@@ -68,7 +68,7 @@ public class LoginSignIn extends AppCompatActivity {
 
     private void moveMainPage(FirebaseUser user) {
         if (user != null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, CalendarMain.class));
             finish();
         }
     }

@@ -62,7 +62,7 @@ public class SummarySchedule extends Activity {
     }
 
     public void OnClickHandler1(View view) {
-        DatePickerDialog dialog = new DatePickerDialog(this, callbackDate, 2023, 10, 17);
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackDate, 2023, 12, 7);
         dialog.show();
     }
 
